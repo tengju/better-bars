@@ -1,9 +1,9 @@
 
 import * as a1lib from "@alt1/base";
 import Ability from "@alt1/ability";
-//tell webpack to add index.html and appconfig.json to output
+
+const appConfig = require("!file-loader?name=[name].[ext]!./appconfig.json");
 require("!file-loader?name=[name].[ext]!./index.html");
-require("!file-loader?name=[name].[ext]!./appconfig.json");
 require("!file-loader?name=[name].[ext]!./Prayer.png");
 
 
@@ -21,5 +21,5 @@ if (window.alt1) {
 	//tell alt1 about the app
 	//this makes alt1 show the add app button when running insane the embedded browser
 	//also updates app settings if they are changed
-	alt1.identifyAppUrl("./appconfig.json");
+	alt1.identifyAppUrl(appConfig.configUrl);
 }
