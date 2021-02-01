@@ -1,8 +1,8 @@
 {
 	"appName": "example app",
 	"description": "minimal alt1 webpack/ts example test app",
-	"appUrl": "./index.html",
-	"configUrl": "./appconfig.json",
+	"appUrl": "https://tengju.github.io/better-bars/release/index.html",
+	"configUrl": "https://tengju.github.io/better-bars/release/appconfig.json",
 	"iconUrl": "",
 	"defaultWidth": 250,
 	"defaultHeight": 200,
