@@ -12,7 +12,7 @@
       margin: 0;
     }
 
-    @-webkit-keyframes flash {
+    @keyframes flash {
       0% {
         opacity: 0;
       }
@@ -31,10 +31,10 @@
     }
 
     .demo {
-      -webkit-animation-name: flash;
-      -webkit-animation-duration: 900ms;
-      -webkit-animation-iteration-count: infinite;
-      -webkit-animation-timing-function: ease-in-out;
+      animation-name: flash;
+      animation-duration: 900ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
     }
   </style>
 </head>
@@ -42,10 +42,13 @@
 <body>
   <div id="app">
     <div>
+      <game-bar name="HP 1" background="rgb(255, 0, 0)" v-bind:left.sync="hpLeft" />
+    </div>
+    <div>
       <game-bar name="PRAY 1" background="rgb(45,5,62)" v-bind:left.sync="prayLeft" />
     </div>
     <div>
-      <game-bar name="HP 1" background="rgb(2,6,116)" v-bind:left.sync="hpLeft" />
+      <game-bar name="PRAY 1" background="rgb(45,5,62)" v-bind:left.sync="prayLeft" />
     </div>
   </div>
 
@@ -69,6 +72,7 @@
             this.interval = setInterval(() => {
               try {
                 const { hp, pray } = ALT1.capture()
+                console.log(ALT1.capture())
                 this.hpLeft = parseInt(hp * 100)
                 this.prayLeft = parseInt(pray * 100)
               } catch (error) {
@@ -100,7 +104,7 @@
         display:flex;
         align-items:center;
         color:white;
-        height: 50vh">
+        height: 33.3vh">
         <div v-bind:style="style"/>
         <span style="z-index:4"> {{name}} {{left}}</span>
        
