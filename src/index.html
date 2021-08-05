@@ -42,13 +42,13 @@
 <body>
   <div id="app">
     <div>
-      <game-bar name="HP 1" background="rgb(255, 0, 0)" v-bind:left.sync="hpLeft" />
+      <game-bar name="HP" background="rgb(255, 0, 0)" v-bind:left.sync="hpLeft" />
     </div>
     <div>
-      <game-bar name="PRAY 1" background="rgb(45,5,62)" v-bind:left.sync="prayLeft" />
+      <game-bar name="PRAY" background="rgb(0,0,255)" v-bind:left.sync="prayLeft" />
     </div>
     <div>
-      <game-bar name="PRAY 1" background="rgb(45,5,62)" v-bind:left.sync="prayLeft" />
+      <game-bar name="SUM" background="rgb(0,255,0)" v-bind:left.sync="sumLeft" />
     </div>
   </div>
 
@@ -56,7 +56,7 @@
   <script>
     const app = Vue.createApp({
       data() {
-        return { hpLeft: 0, prayLeft: 0, interval: null, found: false }
+        return { hpLeft: 0, prayLeft: 0, sumLeft: 0, interval: null, found: false }
       },
       mounted() {
         this.startInterval();
@@ -71,10 +71,10 @@
           if (!this.interval) {
             this.interval = setInterval(() => {
               try {
-                const { hp, pray } = ALT1.capture()
-                console.log(ALT1.capture())
+                const { hp, pray, sum } = ALT1.capture()
                 this.hpLeft = parseInt(hp * 100)
                 this.prayLeft = parseInt(pray * 100)
+                this.sumLeft = parseInt(sum * 100)
               } catch (error) {
                 console.log(error);
               }
