@@ -437,7 +437,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/proxyteng/runescape/better-bars/src/index.ts */"./index.ts");
+module.exports = __webpack_require__(/*! /home/proxyteng/game-dev/runescape/better-bars/src/index.ts */"./index.ts");
 
 
 /***/ })
