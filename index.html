@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://unpkg.com/vue@3.0.5/dist/vue.global.prod.js"></script>
+  <style>
+    body,
+    html {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    @keyframes flash {
+      0% {
+        opacity: 0;
+      }
+
+      22% {
+        opacity: .22;
+      }
+
+      77% {
+        opacity: .8;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .demo {
+      animation-name: flash;
+      animation-duration: 900ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <game-bar name="HP 1" background="rgb(255, 0, 0)" v-bind:left.sync="hpLeft" />
+    </div>
+    <div>
+      <game-bar name="PRAY 1" background="rgb(45,5,62)" v-bind:left.sync="prayLeft" />
+    </div>
+    <div>
+      <game-bar name="PRAY 1" background="rgb(45,5,62)" v-bind:left.sync="prayLeft" />
+    </div>
+  </div>
+
+  <script src="https://tengju.github.io/better-bars/release/index.bundle.js"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return { hpLeft: 0, prayLeft: 0, interval: null, found: false }
+      },
+      mounted() {
+        this.startInterval();
+      },
+      methods: {
+        cancelInterval() {
+          if (this.interval) {
+            clearInterval(this.interval)
+          }
+        },
+        startInterval() {
+          if (!this.interval) {
+            this.interval = setInterval(() => {
+              try {
+                const { hp, pray } = ALT1.capture()
+                console.log(ALT1.capture())
+                this.hpLeft = parseInt(hp * 100)
+                this.prayLeft = parseInt(pray * 100)
+              } catch (error) {
+                console.log(error);
+              }
+            }, 600)
+          }
+        }
+      }
+    })
+    app.component('game-bar', {
+      props: ['background', 'name', 'left'],
+      computed: {
+        style() {
+          return {
+            position: 'absolute',
+            background: this.background,
+            width: this.left + '%',
+            zIndex: 3,
+            height: '100%'
+          }
+        }
+      },
+      template: `
+      <div style="
+        width: 100%;
+        background:orange; 
+        position: relative;
+        display:flex;
+        align-items:center;
+        color:white;
+        height: 33.3vh">
+        <div v-bind:style="style"/>
+        <span style="z-index:4"> {{name}} {{left}}</span>
+       
+      </div>`
+    })
+    app.mount('#app')
+  </script>
+</body>
+
+</html>
